@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd">
+	<db:config name="postgresqlDatabaseConfig" doc:name="Database Config" doc:id="97e32d86-731b-447e-8950-e25b5803476b" >
+		<db:generic-connection url="${secure::postgresqldb.url}" driverClassName="org.postgresql.Driver" user="${secure::postgresqldb.user}" password="${secure::postgresqldb.password}" />
+	</db:config>
+	<db:config name="msSqlInstanceDbConfig" doc:name="Database Config" doc:id="6a2dc54c-7a7e-4f4e-bde8-d3bd7e077bab" >
+		<db:mssql-connection host="${secure::db.host}" databaseName="test" user="${secure::db.user}" password="${secure::db.password}" port="${secure::db.port}" instanceName="${secure::db.instance}">
+		</db:mssql-connection>
+	</db:config>
+	
+	<configuration-properties doc:name="Configuration properties" doc:id="77194d66-8877-4a80-ae96-dafa88c0b731" file="config.yaml" />
+	
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="4154d937-5c51-4faa-9404-b0849144492c" file="config-secure.yaml" key="${encrypt.key}" >
+		<secure-properties:encrypt algorithm="Blowfish" />
+	</secure-properties:config>
+	<http:listener-config name="httpListenerConfig" doc:name="HTTP Listener config" doc:id="1c430722-66a1-449d-9c66-05575d6d9410" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<global-property doc:name="Global Property" doc:id="9b6398ac-00f0-4b13-9a70-3cfb41c196e7" name="encrypt.key" value="********" />
+	<file:config name="fileConfig" doc:name="File Config" doc:id="1eb943c9-6c35-41b9-99c7-40f9723a2599" />
+</mule>

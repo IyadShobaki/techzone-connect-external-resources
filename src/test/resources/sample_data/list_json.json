@@ -1,0 +1,23 @@
+[
+    {
+        "Password": "1111",
+        "AccountNumber": "1234      ",
+        "Balance": 20000.0000,
+        "Name": "John",
+        "Id": 1
+    },
+    {
+        "Password": "1111",
+        "AccountNumber": "2345      ",
+        "Balance": 33000.0000,
+        "Name": "Mike",
+        "Id": 2
+    },
+    {
+        "Password": "2222",
+        "AccountNumber": "9992      ",
+        "Balance": 4320.0000,
+        "Name": "Mary",
+        "Id": 4
+    }
+]

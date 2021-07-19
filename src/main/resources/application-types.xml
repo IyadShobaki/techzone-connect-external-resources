@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="bankDetails_json" format="json">
+      <types:shape format="weave" example="examples/bankDetails.json"><![CDATA[%dw 2.0
+
+type bankDetails_json = Array<{|  Password: String,   AccountNumber: String,   Balance: Number {"typeId": "double"},   Name: String,   Id: Number {"typeId": "int"}|}> {"example": "[{\\\"Password\\\":\\\"1111\\\",\\\"AccountNumber\\\":\\\"1234      \\\",\\\"Balance\\\":20000.0000,\\\"Name\\\":\\\"John\\\",\\\"Id\\\":1},{\\\"Password\\\":\\\"1111\\\",\\\"AccountNumber\\\":\\\"2345      \\\",\\\"Balance\\\":33000.0000,\\\"Name\\\":\\\"Mike\\\",\\\"Id\\\":2},{\\\"Password\\\":\\\"2222\\\",\\\"AccountNumber\\\":\\\"9992      \\\",\\\"Balance\\\":4320.0000,\\\"Name\\\":\\\"Mary\\\",\\\"Id\\\":4}]"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#cb72b202-cc08-4b54-bb1b-3af66f19e70c"/>
+</types:mule>
