@@ -9,3 +9,10 @@ postgresqldb:
   url: "![feZL/zC/YV+N/uY3T+gQ07S86A6Xh7pW2QWrfTlJJx5P4hRoVw1gcLZGig0FIMxU]"
   user: "![fLN33XNXY03xI/8tLxU1kg==]"
   password: "![LwmxEc/UK8o=]"
+
+
+salesforce:
+  username: "![D8LmGWpCKUOk3esw+jcRPVtrRI/+MU9AXDgUZNsqphM=]"
+  password: "![2u207qH2y/FDBj7vapqsiQ==]"
+  securityToken: "![rZIl1mDU4/ttk1p/vBKMslAhEySQmWtUI9kVOzDeGw4=]"
+  

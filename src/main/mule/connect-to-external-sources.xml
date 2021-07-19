@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
-	xmlns:db="http://www.mulesoft.org/schema/mule/db"
-	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+<mule xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce" xmlns:os="http://www.mulesoft.org/schema/mule/os"
+	xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
-http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd">
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/os http://www.mulesoft.org/schema/mule/os/current/mule-os.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd">
 	<flow name="connect-to-external-sourcesFlow" doc:id="2c4f1f10-2715-43fa-8416-9a81ddad7504" >
 		<http:listener doc:name="Listener" doc:id="94b581ea-afc1-4cd8-9dcf-b054ddda6ecc" config-ref="httpListenerConfig" path="/test"/>
 		<db:select doc:name="Select" doc:id="638c4d15-f3c8-4959-93f5-631ebdf894a4" config-ref="msSqlInstanceDbConfig">
@@ -40,5 +42,19 @@ output application/json
 				</ee:transform>
 			</otherwise>
 		</choice>
+	</flow>
+	<flow name="connect-to-external-sourcesFlow1" doc:id="b2ea4b9c-755f-46cc-8b49-b1e3ecf04d57" >
+		<http:listener doc:name="Listener" doc:id="f2ec1b58-6768-44fa-ac67-f835d5e68844" config-ref="httpListenerConfig" path="/salesforce"/>
+		<salesforce:query doc:name="Query" doc:id="a88fe29c-0940-4030-b367-e119784828b4" config-ref="salesforceConfig">
+			<salesforce:salesforce-query ><![CDATA[SELECT Name, BillingStreet, BillingCity, BillingState, BillingPostalCode, AccountNumber FROM Account]]></salesforce:salesforce-query>
+		</salesforce:query>
+		<ee:transform doc:name="Transform Message" doc:id="3c4e41a3-ee28-4248-ba2a-78a01930064c" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
 	</flow>
 </mule>
