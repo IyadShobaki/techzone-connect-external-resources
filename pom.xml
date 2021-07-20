@@ -98,6 +98,12 @@
             <version>10.7.0</version>
             <classifier>mule-plugin</classifier>
         </dependency>
+    	<dependency>
+            <groupId>com.mulesoft.connectors</groupId>
+            <artifactId>mule-amazon-s3-connector</artifactId>
+            <version>5.7.0</version>
+            <classifier>mule-plugin</classifier>
+        </dependency>
     </dependencies>
 
 	<repositories>

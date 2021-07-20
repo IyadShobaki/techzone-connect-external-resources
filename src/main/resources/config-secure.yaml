@@ -16,3 +16,7 @@ salesforce:
   password: "![2u207qH2y/FDBj7vapqsiQ==]"
   securityToken: "![rZIl1mDU4/ttk1p/vBKMslAhEySQmWtUI9kVOzDeGw4=]"
   
+aws:
+  keyId: "![OE52d0wB7hPhR96709ik7y++8C2ClTja]"
+  secretKey: "![DqIzu3jBloDCNW+XfNkt/dtVjBE2xMsSA1DWgFRDNvUiKJWWOyFuG6XmxfnF0c60]"
+  bucketName: "![zFsekTCnRJX3+zucrHoDSA==]"

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce" xmlns:os="http://www.mulesoft.org/schema/mule/os"
-	xmlns:file="http://www.mulesoft.org/schema/mule/file"
-	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties" xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+<mule xmlns:s3="http://www.mulesoft.org/schema/mule/s3" xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+	xmlns:os="http://www.mulesoft.org/schema/mule/os"
+	xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties" xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
 http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
 http://www.mulesoft.org/schema/mule/os http://www.mulesoft.org/schema/mule/os/current/mule-os.xsd
-http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd">
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd
+http://www.mulesoft.org/schema/mule/s3 http://www.mulesoft.org/schema/mule/s3/current/mule-s3.xsd">
 	<db:config name="postgresqlDatabaseConfig" doc:name="Database Config" doc:id="97e32d86-731b-447e-8950-e25b5803476b" >
 		<db:generic-connection url="${secure::postgresqldb.url}" driverClassName="org.postgresql.Driver" user="${secure::postgresqldb.user}" password="${secure::postgresqldb.password}" />
 	</db:config>
@@ -29,7 +30,10 @@ http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mu
 		<salesforce:basic-connection username="${secure::salesforce.username}" password="${secure::salesforce.password}" securityToken="${secure::salesforce.securityToken}" />
 	</salesforce:sfdc-config>
 	
-	<global-property doc:name="Global Property" doc:id="9b6398ac-00f0-4b13-9a70-3cfb41c196e7" name="encrypt.key" value="********" />
+	<global-property doc:name="Global Property" doc:id="9b6398ac-00f0-4b13-9a70-3cfb41c196e7" name="encrypt.key" value="*********" />
 	<file:config name="fileConfig" doc:name="File Config" doc:id="1eb943c9-6c35-41b9-99c7-40f9723a2599" />
+	<s3:config name="amazonS3Configuration" doc:name="Amazon S3 Configuration" doc:id="d008e6ad-1615-4b41-8b6a-195f83fe128b" >
+		<s3:basic-connection accessKey="${secure::aws.keyId}" secretKey="${secure::aws.secretKey}" region="US_EAST_2" />
+	</s3:config>
 	
 </mule>
